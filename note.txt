@@ -1,0 +1,31 @@
+
+
+     ###################Thymeleaf###################################
+
+
+     #We can use the th:text=”${attributename}” tag attribute to display the value of model attributes.
+     -->>>> here attributename is model attribute
+
+     #If the model attribute is a collection of objects, we can use the th:each tag attribute to iterate over it
+
+    List<Student> students = new ArrayList<Student>();
+    // logic to build student data
+    model.addAttribute("students", students);
+
+     <tbody>
+         <tr th:each="student: ${students}">
+             <td th:text="${student.id}" />
+             <td th:text="${student.name}" />
+         </tr>
+     </tbody>
+     #We use the th:if=”${condition}” attribute to display a section of the view if the condition is met.
+           And we use the th:unless=”${condition}” attribute to display a section of the view if the condition is not met
+
+     thymeleaf are used to bind the attribute to the model
+
+     ##We can handle form input using the th:action=”@{url}” and th:object=”${object}” attributes.
+          We use th:action to provide the form action URL and th:object to specify an object to which the submitted form data will be bound.
+
+
+    th:href means on clicking link
+    and th:action means on performing actionb
