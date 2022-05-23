@@ -4,6 +4,7 @@ import com.example.registrationLogin.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,7 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(
 //                Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations (i.e. via URL patterns)v
                         "/registration/**").permitAll()
-                .antMatchers("/api/v1/students/{id}/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/v1/students/{rollNo}/**").permitAll()
+                .antMatchers(HttpMethod.PUT,"/api/v1/students/{rollNo}/**").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/api/v1/students/{rollNo}/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/v1/students/**").permitAll()
                 .antMatchers("/api/v1/students/**").permitAll()
                 .antMatchers("/js/**",
                         "/css/**",
@@ -75,6 +79,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                  message of logout
                  */
                 .permitAll();
+        http.csrf().disable();
     }
 
     @Bean
