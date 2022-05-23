@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Registration and Login App</title>
+    <title>Student Management System</title>
 
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -23,8 +23,7 @@
                     class="icon-bar"></span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" th:href="@{/}">Registration and
-                Login Module</a>
+            <a class="navbar-brand" href="#" th:href="@{/}">Student Management System</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -33,15 +32,31 @@
         </div>
     </div>
 </nav>
-
 <br>
 <br>
-
+<br>
+<br>
 <div class="container">
-    <h1>Registration and Login with Spring Boot, Spring Security,
-        Thymeleaf, Hibernate and MySQL</h1>
     Welcome <span sec:authentication="principal.username"> User</span>
 <!--    this thymeleaf provides username to the page-->
 </div>
+<div th:switch="${student.assignedMessage}" >
+    <div th:case="'Accepted'" class="alert alert-success"> Dear
+        <strong th:text="${session.username}"> !</strong> , your Application is Accepted by Admin
+    </div>
+    <div>
+        <div th:switch="*{student.assignedMessage}" >
+            <div th:case="'Rejected'" class="alert alert-danger"> Dear
+                <strong th:text="${session.username}"> !</strong>, your Application is Rejected by Admin
+            </div>
+            <div>
+
+<h3><a th:href="@{/registration}">Click here to Register Another Account </a></h3>
+<h3><a th:href="@{/users}">List of Users</a></h3>
+<h3><a th:href="@{/apply}">Click here for apply for an Admission</a></h3>
+<h3><a th:href="@{/edit}">Click here to edit your Application </a></h3>
+    </div>
+        </div>
+    </div>
 </body>
 </html>

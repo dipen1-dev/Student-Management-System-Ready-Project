@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RegistrationLoginSpringbootSecurityApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RegistrationLoginSpringbootSecurityApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RegistrationLoginSpringbootSecurityApplication.class, args);
+    }
 
 }

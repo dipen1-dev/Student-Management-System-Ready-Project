@@ -14,13 +14,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-//it enables web security support  i
+//it enables web security support
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     /* provides convenient base class for websecurityconfiguration the implementation allows customization
     by overriding method
      */
 
-   // @Autowired
+    // @Autowired
     /*Autowired is field base injection which inject object of one class to another class*/
     private UserService userService;
 
@@ -40,17 +40,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(
 //                Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations (i.e. via URL patterns)v
-                        "/registration**",
-                        "/js/**",
+                        "/registration/**").permitAll()
+                .antMatchers("/api/v1/students/{id}/**").permitAll()
+                .antMatchers("/api/v1/students/**").permitAll()
+                .antMatchers("/js/**",
                         "/css/**",
                         "/img/**").permitAll()
+                .antMatchers("/users").hasAnyAuthority("ROLE_ADMIN")
 //                Specify that URLs are allowed by anyone.
                 .anyRequest().authenticated()
 //               anyRequest map any request,Specify that URLs are allowed by any authenticated user.
                 .and()
                 .formLogin()
 //              to support form based authentication.
-                .loginPage("/login")
+                .loginPage("/login").defaultSuccessUrl("/welcome")
                 /*Specifies the URL to send users to if login is required*/
                 .permitAll()
                 /* permiting all the authenticated user from login page */

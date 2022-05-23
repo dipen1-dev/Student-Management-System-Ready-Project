@@ -21,7 +21,7 @@
                     class="icon-bar"></span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" th:href="@{/}">Registration and
+            <a class="navbar-brand" href="#" th:href="@{/registration}">Registration and
                 Login Module</a>
         </div>
     </div>
@@ -33,10 +33,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-
 <!--            error message-->
-
-            <div th:if="${param.error}">
+            <div
+                    th:if="${param.error}">
                 <div class="alert alert-danger">Sorry already Registered.</div>
             </div>
             <!-- success message -->

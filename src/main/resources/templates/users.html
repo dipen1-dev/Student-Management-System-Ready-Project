@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<!-- create navigation bar ( header) -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" th:href="@{/}">Student Management System</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<div th:switch="${session.message}" >
+    <div th:case="'Accept'" class="alert alert-success">
+        <strong>Accepted!</strong> successfully.
+    </div>
+    <div>
+<div th:switch="${session.message}">
+    <div th:case="'Delete'" class="alert alert-success">
+        <strong>Rejected!</strong> successfully.
+    </div>
+</div>
+    <tr>
+
+        <div class="col-md-12" align = "center">
+            <div class="panel-body" align = "center" >
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Entrance RollNo </th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>DOB</th>
+                        <th>Entrance Score</th>
+                        <th>Accept</th>
+                        <th>Reject</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr  th:each="student : ${liststudent}">
+                        <!--		  here liststudent is the model attribute in controller-->
+                        <!--		  it takes all student object from list of student-->
+                        <td th:text="${student.entranceRollNo}">Entrance Roll No </td>
+                        <td th:text="${student.firstName}">First Name</td>
+                        <td th:text="${student.lastName}">Last Name</td>
+                        <td th:text="${student.DOB}">Date of Birth</td>
+                        <td th:text="${student.entranceScore}">Entrance Score</td>
+                        <td>
+                            <a th:href="@{'/accept/' + ${student.rollNo}+ '/' +${student.loggedInEmail}}">Accept</a>
+                        </td>
+                        <td>
+                            <a th:href="@{'/delete/' + ${student.rollNo}+'/'+ ${student.loggedInEmail}}">Reject</a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </tr>
+
+    </tbody>
+    </table>
+</div>
+</div>
+</div>
+</body>
+</html>
