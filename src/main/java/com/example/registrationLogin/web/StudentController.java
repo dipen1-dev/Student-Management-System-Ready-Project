@@ -16,7 +16,7 @@ public class StudentController {
     private StudentService studentService;
 
     //    build create student REST API
-    @PostMapping()
+    @PostMapping
     public Student createStudent(@RequestBody Student student) {
         System.out.println(student);
         return studentService.save(student);
